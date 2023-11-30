@@ -1,7 +1,14 @@
 cmake_minimum_required(VERSION 3.8)
 
-set(CUDA_SDK_ROOT_DIR "/usr/local/cuda/samples")
+# set(CUDA_SDK_ROOT_DIR "/usr/local/cuda/samples")
+set(CUDA_TOOLKIT_ROOT_DIR "/usr/local/cuda")
+set(CMAKE_CUDA_COMPILER "/usr/local/cuda/bin/nvcc")
 
+
+if(NOT DEFINED ${CMAKE_CUDA_ARCHITECTURES})
+  set(CMAKE_CUDA_ARCHITECTURES 75)
+endif()
+message(STATUS "CUDA architectures set to ${CMAKE_CUDA_ARCHITECTURES}")
 
 project(hyp_despot CXX CUDA)
 
@@ -57,9 +64,14 @@ set(CUDA_SEPARABLE_COMPILATION ON)
 
 set(POSITION_INDEPENDENT_CODE ON)
 
+include_directories(SYSTEM /usr/include/eigen3)
+find_package(Eigen3 REQUIRED)
+
 include_directories(
    src/RVO2/src
    src/HypDespot/include/
+  #  /usr/include/eigen3
+
 )
 
 FILE(GLOB LIBRVO_SRCS  src/RVO2/src/*.cpp)

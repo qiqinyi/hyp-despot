@@ -145,7 +145,7 @@ DEVICE void Dvc_UncNavigation::Dvc_Copy_NoAlloc(Dvc_State* des, const Dvc_State*
 	/*Pass member values, assign member pointers to existing state pointer*/
 	const Dvc_UncNavigationState* src_i= static_cast<const Dvc_UncNavigationState*>(src)+pos;
 	if(!offset_des) pos=0;
-	Dvc_UncNavigationState* des_i= static_cast<const Dvc_UncNavigationState*>(des)+pos;
+	Dvc_UncNavigationState* des_i= static_cast<Dvc_UncNavigationState*>(des)+pos;
 
 	*des_i = *src_i;
 	des_i->SetAllocated();

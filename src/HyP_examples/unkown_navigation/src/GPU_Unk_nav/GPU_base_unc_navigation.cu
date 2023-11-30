@@ -443,10 +443,10 @@ Dvc_State* BaseUncNavigation::CopyParticlesToGPU(Dvc_State* dvc_particles, const
 	for (int i=0;i<particles.size();i++)
 	{
 		const UncNavigationState* src=static_cast<const UncNavigationState*>(particles[i]);
-		Dvc_UncNavigationState::CopyMainStateToGPU(static_cast<const Dvc_UncNavigationState*>(dvc_particles)
+		Dvc_UncNavigationState::CopyMainStateToGPU(static_cast<Dvc_UncNavigationState*>(dvc_particles)
 				,src->scenario_id,src);
 	}
-	Dvc_UncNavigationState::CopyCellsToGPU(static_cast<const Dvc_UncNavigationState*>(dvc_particles),particles.size());
+	Dvc_UncNavigationState::CopyCellsToGPU(static_cast<Dvc_UncNavigationState*>(dvc_particles),particles.size());
 
 	cout<<"GPU particles copy time:"<<chrono::duration_cast<sec>(Time::now() - start).count()<<endl;
 
